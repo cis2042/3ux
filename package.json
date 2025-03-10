@@ -1,14 +1,37 @@
 {
-  "name": "video-sharing-platform",
+  "name": "3ux",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A modern video sharing platform with cherry blossom animations and kawaii design",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "postinstall": "[ -f .env ] || cp .env.example .env"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cis2042/3ux.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "vite",
+    "supabase",
+    "video-platform",
+    "ux"
+  ],
+  "author": "CIS2042",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cis2042/3ux/issues"
+  },
+  "homepage": "https://cis2042.github.io/3ux",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
     "date-fns": "^3.3.1",
