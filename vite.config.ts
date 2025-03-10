@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/3ux/',
+  base: '/3ux/',  // 匹配 GitHub Pages 倉庫名稱
   server: {
     host: '0.0.0.0', // Listen on all network interfaces
     port: 5173,
