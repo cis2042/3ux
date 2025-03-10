@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import VideoGrid from './components/VideoGrid';
@@ -21,7 +21,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>('date');
   const { t } = useTranslation();
   
@@ -30,10 +30,10 @@ function App() {
   // 添加調試日誌
   useEffect(() => {
     console.log('應用程序初始化 - 環境:', import.meta.env.MODE);
-    console.log('基礎URL:', import.meta.env.BASE_URL || '/ux3');
+    console.log('基礎URL:', import.meta.env.BASE_URL || '/3ux');
   }, []);
 
-  const loadVideos = async (pageNumber: number) => {
+  const loadVideos = async (pageNumber: number): Promise<void> => {
     try {
       setIsLoading(true);
       console.log('開始加載視頻數據...');
@@ -47,7 +47,7 @@ function App() {
       
       // 計算分頁和過濾
       if (searchTerm) {
-        const filtered = allVideos.filter(video => 
+        const filtered = allVideos.filter((video: Video) => 
           video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           video.creator.toLowerCase().includes(searchTerm.toLowerCase()) ||
           video.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -75,7 +75,7 @@ function App() {
   // 當搜索詞變化時更新過濾結果
   useEffect(() => {
     if (videos.length > 0) {
-      const filtered = videos.filter(video =>
+      const filtered = videos.filter((video: Video) =>
         video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         video.creator.toLowerCase().includes(searchTerm.toLowerCase()) ||
         video.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -93,13 +93,13 @@ function App() {
   };
 
   // 根據排序方式對過濾後的視頻進行排序
-  const displayVideos = [...filteredVideos].sort((a, b) => {
+  const displayVideos = [...filteredVideos].sort((a: Video, b: Video) => {
     if (sortBy === 'date') {
       return new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime();
     } else if (sortBy === 'views') {
-      return b.views_count - a.views_count;
+      return (b.views_count || 0) - (a.views_count || 0);
     } else if (sortBy === 'likes') {
-      return b.likes - a.likes;
+      return (b.likes || 0) - (a.likes || 0);
     }
     return 0;
   });

@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpDown } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 
-export type SortOption = 'title' | 'likes' | 'date';
+export type SortOption = 'title' | 'likes' | 'date' | 'views';
 
 interface SortControlProps {
   currentSort: SortOption;
@@ -25,6 +25,7 @@ const SortControl: React.FC<SortControlProps> = ({ currentSort, onSortChange }) 
         <option value="date">{t('sortByDate')}</option>
         <option value="title">{t('sortByTitle')}</option>
         <option value="likes">{t('sortByLikes')}</option>
+        <option value="views">{t('sortByViews')}</option>
       </select>
     </div>
   );
