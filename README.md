@@ -1,10 +1,10 @@
-# UX3 - 現代UI視頻分享平台
+# 3UX - 現代UI視頻分享平台
 
-一個現代化、精美的視頻分享平台，具有櫻花動畫效果和卡哇伊設計風格。
+一個現代化、精美的視頻分享平台，具有櫻花動畫效果和卡哇伊設計風格。2024 年 UX 案例研究項目。
 
 ## 在線訪問
 
-訪問在線演示: [https://donwen.github.io/ux3](https://donwen.github.io/ux3)
+訪問在線演示: [https://donwen.github.io/3ux](https://donwen.github.io/3ux)
 
 ## 功能亮點
 
@@ -57,4 +57,4 @@ npm run build
 
 ## 授權
 
-MIT License 
+MIT License
