@@ -8,7 +8,7 @@ import Logo from './components/Logo';
 import VideoPage from './pages/VideoPage';
 import SortControl, { SortOption } from './components/SortControl';
 import { Video } from './types';
-import { getVideosWithFallback } from './lib/supabaseClient';
+import { getVideos } from './lib/supabaseClient';
 import { useTranslation } from './hooks/useTranslation';
 import CherryBlossomProvider from './contexts/CherryBlossomContext';
 import TestPage from './pages/TestPage';
@@ -38,9 +38,9 @@ function App() {
       setIsLoading(true);
       console.log('開始加載視頻數據...');
       
-      // 使用帶後備功能的API調用，獲取所有視頻
-      const allVideos = await getVideosWithFallback();
-      console.log('獲取到視頻數據:', allVideos.length);
+      // 從 Supabase 獲取視頻數據
+      const allVideos = await getVideos();
+      console.log('從 Supabase 獲取到視頻數據:', allVideos.length);
       
       // 儲存所有視頻數據
       setVideos(allVideos);
