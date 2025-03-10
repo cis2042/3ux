@@ -41,38 +41,18 @@ testConnection();
 export const getVideos = async () => {
   const response = await supabase
     .from('videos')
-    .select(`
-      id,
-      title,
-      description,
-      url,
-      upload_date,
-      creator,
-      duration,
-      thumbnail_url,
-      likes,
-      views_count,
-      article_url,
-      category,
-      created_at
-    `)
+    .select('*')
     .order('created_at', { ascending: false });
 
   if (response.error) {
-    console.error('Failed to fetch videos:', response.error);
-    throw new Error(`Failed to fetch videos: ${response.error.message}`);
+    console.error('獲取視頻時出錯:', response.error);
+    throw new Error(`獲取視頻時出錯: ${response.error.message}`);
   }
 
-  // 轉換數據格式以符合前端期望
-  const videos = (response.data || []).map(video => ({
-    ...video,
-    uploadDate: video.upload_date ? new Date(video.upload_date).toISOString().split('T')[0] : 
-               new Date(video.created_at).toISOString().split('T')[0],
-    thumbnailUrl: video.thumbnail_url,
-    views_count: video.views_count || 0,
-    likes: video.likes || 0
-  }));
+  console.log('從 Supabase 獲取到視頻數據:', {
+    count: response.data?.length || 0,
+    sample: response.data?.[0]
+  });
 
-  console.log('轉換後的視頻數據:', videos);
-  return videos;
+  return response.data || [];
 };
